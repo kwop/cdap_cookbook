@@ -27,6 +27,7 @@ default['cdap']['cdap_site']['root.namespace'] = 'cdap'
 default['cdap']['cdap_site']['hdfs.namespace'] = "/#{node['cdap']['cdap_site']['root.namespace']}"
 default['cdap']['cdap_site']['hdfs.user'] = 'yarn'
 default['cdap']['cdap_site']['kafka.seed.brokers'] = "#{node['fqdn']}:9092"
+default['cdap']['cdap_site']['market.base.urls'] = "http://perdu.com/templates/"
 default['cdap']['cdap_site']['log.retention.duration.days'] = '7'
 # COOK-85
 if node['cdap']['version'].to_f < 4.0
