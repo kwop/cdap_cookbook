@@ -29,10 +29,14 @@ end
 
 include_recipe 'cdap::repo'
 
-package 'cdap-ui' do
-  action :install
-  version node['cdap']['version']
+rpm_package "cdap-ui" do
+  source "/tmp/cdap-ui.rpm"
 end
+
+# package 'cdap-ui' do
+#  action :install
+#  version node['cdap']['version']
+# end
 
 include_recipe 'cdap::ssl_keystore_certificates'
 

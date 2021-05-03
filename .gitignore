@@ -13,6 +13,10 @@ Gemfile.lock
 bin/*
 .bundle/*
 
+.DS_Store
+.idea/
+cdap_cookbook.iml
+
 .kitchen/
 .kitchen.local.yml
 

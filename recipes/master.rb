@@ -19,14 +19,9 @@
 
 include_recipe 'cdap::default'
 
-# Support for HBase 0.96 and 0.98 removed in 6.1.1
 pkgs = []
-pkgs += ['cdap-hbase-compat-0.96', 'cdap-hbase-compat-0.98'] if node['cdap']['version'].to_f < 6.1
-pkgs += ['cdap-hbase-compat-1.0', 'cdap-hbase-compat-1.0-cdh'] if node['cdap']['version'].to_f >= 3.1
-pkgs += ['cdap-hbase-compat-1.1'] if node['cdap']['version'].to_f >= 3.2
-pkgs += ['cdap-hbase-compat-1.0-cdh5.5.0'] if node['cdap']['version'].to_f >= 3.3
-pkgs += ['cdap-hbase-compat-1.2-cdh5.7.0'] if node['cdap']['version'].to_f >= 3.4
-pkgs += ['cdap-hbase-compat-0.94'] if node['cdap']['version'].to_f < 3.1
+pkgs += ['cdap-hbase-compat-1.1']
+pkgs += ['cdap-hbase-compat-1.2-cdh5.7.0']
 
 pkgs.each do |pkg|
   package pkg do
@@ -92,12 +87,7 @@ service 'cdap-master' do
   action node['cdap']['master']['init_actions']
 end
 
-upgrade_class =
-  if node['cdap']['version'].to_f >= 6.0
-    'io.cdap.cdap.data.tools.UpgradeTool'
-  else
-    'co.cask.cdap.data.tools.UpgradeTool'
-  end
+upgrade_class = 'io.cdap.cdap.data.tools.UpgradeTool'
 
 # CDAP Upgrade Tool
 execute 'cdap-upgrade-tool' do
