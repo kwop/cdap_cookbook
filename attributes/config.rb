@@ -34,7 +34,7 @@ if node['cdap']['version'].to_f < 4.0
   default['cdap']['cdap_site']['metadata.updates.kafka.broker.list'] = node['cdap']['cdap_site']['kafka.seed.brokers']
 end
 default['cdap']['cdap_site']['zookeeper.quorum'] = "#{node['fqdn']}:2181/#{node['cdap']['cdap_site']['root.namespace']}"
-default['cdap']['cdap_site']['router.bind.address'] = "0.0.0.0"
+default['cdap']['cdap_site']['router.bind.address'] = node['fqdn']
 default['cdap']['cdap_site']['router.server.address'] = node['fqdn']
 
 # HDP 2.2+ support
