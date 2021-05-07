@@ -36,7 +36,7 @@ end
 ruby_block "ensure spark does not conflict jvm options" do
   block do
     fe = Chef::Util::FileEdit.new("/etc/spark/conf.dist/spark-defaults.conf")
-    fe.search_file_delete_line("/spark\.driver\.extraJavaOptions/")
+    fe.search_file_delete_line("/spark.driver.extraJavaOptions/")
     fe.write_file
   end
 end
