@@ -33,6 +33,14 @@ file '/etc/profile.d/cdap_home.sh' do
   mode '0755'
 end
 
+ruby_block "ensure spark does not conflict jvm options" do
+  block do
+    fe = Chef::Util::FileEdit.new("/etc/spark/conf.dist/spark-defaults.conf")
+    fe.search_file_delete_line("/spark\.driver\.extraJavaOptions/")
+    fe.write_file
+  end
+end
+
 # Create CDAP user, if configured (otherwise, delegate to package)
 include_recipe 'cdap::user' if node['cdap']['create_cdap_user'].to_s == 'true'
 
